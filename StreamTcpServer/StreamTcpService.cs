@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ namespace StreamTcpServer
 {
     class StreamTcpService : ServiceControl
     {
-        private static string address = "192.168.74.1";
-        private static int port = 666;
+        private static string address = ConfigurationManager.AppSettings["StreamTcpServer.Host"];
+        private static int port = Convert.ToInt32(ConfigurationManager.AppSettings["StreamTcpServer.Port"]);
         private ExtendedActorSystem system;
         private Logger _logger = LogManager.GetCurrentClassLogger();
         public bool Start(
