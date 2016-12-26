@@ -43,7 +43,7 @@ namespace StreamTcpServer
             {
                 _logger.Info(
                     $"incoming connection from {connection.RemoteAddress}");
-                connection.HandleWith(DecodeFrame(),
+                connection.HandleWith(Handle(),
                     Materializer);
             }))
             .Run(Materializer)
@@ -53,7 +53,7 @@ namespace StreamTcpServer
                     : "failed to start"));
 
 
-        private static Flow<ByteString, ByteString, NotUsed> DecodeFrame()
+        private static Flow<ByteString, ByteString, NotUsed> Handle()
         {
             var eol = ByteString.FromString("\n");
             var delimiter = Framing.Delimiter(eol,
