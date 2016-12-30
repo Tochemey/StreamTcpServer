@@ -76,9 +76,9 @@ namespace StreamTcpServer
                 });
 
             return Flow.Create<ByteString>()
-                .Via(delimiter)
-                .Via(receiver)
-                .Via(responder);
+                .Via(delimiter.Async())
+                .Via(receiver.Async())
+                .Via(responder.Async());
         }
     }
 }
